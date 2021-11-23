@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+
+{% load static %}
+
+{% block content %}
+
+<body>
+
+<h1>登录</h1>
+<form action="{% url 'users:login' %}" method="post">
+    {% csrf_token %}
+    <p>
+
+        <label for="username">用户名</label>
+<!--        <input type="text"  name ="user">-->
+         {{ form.username }}
+
+
+
+    </p>
+    <p>
+        <label for="password">密码</label>
+<!--        <input type="password"  name = "pwd">-->
+<!--        <input type="submit" value="提交">-->
+        {{ form.password }}
+<!--        <span style="color: red;">{{  error_msg }}</span>-->
+    </p>
+<!--    <input type="hidden" name="next" value="{{ next }}"/>-->
+    <button class="btn btn-success btn-lg" type="submit">登录</button>
+
+</form>
+
+ <div class="message">
+                还没有账号？<a href="{% url 'users:signup' %}">注册</a>
+
+
+
+</body>
+
+{% endblock %}

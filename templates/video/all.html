@@ -1,0 +1,135 @@
+{% extends 'base/base.html' %}
+{% load video_tag %}
+{% load static %}
+{% load thumbnail %}
+
+
+{% block content %}
+
+<div class="col-md-12" style="font-size: 30px; margin-top:35px; margin-bottom: 20px; margin-left: 30px;">
+   {% get_categories as category_list %}
+
+            {% for category in category_list %}
+
+                <a href="{% url 'video:video_category' category.pk %}" style="margin-left:30px; text-decoration: none;">
+                    <span class="label {% cycle 'label-default' 'label-primary' 'label-success' 'label-info' 'label-warning' 'label-danger' %}">
+                    {{ category.C_title }}</span>
+                </a>
+
+
+            {% endfor %}
+
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div style="padding-top:20px;">
+
+            {% get_whole_content as whole_content %}
+
+                {% for whole in whole_content %}
+
+                <div class="col-md-3">
+                    <div class="nav-content">
+                        <a class ="image" href="{% url 'video:detail' whole.pk %}">
+                            {% thumbnail whole.cover "300x200" crop="center" as im %}
+                            <img class="img-responsive" src="{{ im.url }}">
+                                {% empty %}
+                            {% endthumbnail %}
+
+                        </a>
+
+                        <div class="navbar-body">
+                            <a class="header" href="{% url 'video:detail' whole.pk %}">{{ whole.title }}</a>
+                                <div class="meta">
+                                    <span class="date">发布于{{ whole.create_time}}</span>
+                                </div>
+                                <div class="description">
+                                    {{ whole.view_count}}次观看
+                                </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% empty %}
+                <h3>暂无数据</h3>
+
+         {% endfor %}
+        </div>
+    </div>
+ </div>
+
+ <div id="pagination" class="pull-right">
+     <ul class="pagination pahination-lg">
+         {% if videos.has_previous %}
+         <li class="previous"><a href="?page={{ videos.previous_page_number }}">
+             <i class="glyphicon glyphicon-arrow-left"></i></i>上一页</a></li>
+         {% endif %}
+
+                    {% if first %}
+                        <li><a href="?page=1">1</a></li>
+                    {% endif %}
+
+                    {% if left %}
+                        {% if left_has_more %}
+                            <span>....</span>
+                    {% endif %}
+
+                    {% for i in left %}
+
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+
+
+                    <li class="active"><a href="?page={{ videos.number }}">{{ videos.number }}</a></li>
+
+                    {% if right %}
+                        {% for i in right %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endfor %}
+
+                        {% if right_has_more %}
+                            <span>....</span>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if last %}
+                        <li class=""><a href="?page={{ videos.num_pages }}">{{ videos.num_pages }}</a></li>
+                    {% endif %}
+
+                    {% if videos.has_next %}
+                    <li class="next"><a href="?page={{ videos.next_page_number }}">
+                        <i class="glyphicon glyphicon-arrow-right"></i>下一页</a></li>
+                    {% endif %}
+
+
+                </ul>
+
+            </div>
+
+
+
+
+{% endblock  %}
+
+
+
+
+{% block script %}
+
+<script>
+    $(function(){
+        $('.nav-content').mouseenter(function(){
+        $(this).css('opacity',1).css('opacity',0.7);
+    });
+    $('.nav-content').mouseleave(function(){
+
+        $(this).css('opacity',1);
+    });
+    });
+</script>
+
+{% endblock %}

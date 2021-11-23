@@ -1,0 +1,21 @@
+{% load video_tag %}
+{% load static %}
+{% load thumbnail %}
+
+
+
+<div class="tag_name" style="margin-top:35px;">
+
+   {% get_tags as tags_list %}
+
+            {% for tags in tags_list %}
+
+                <a href="{% url 'video:video_tag' tags.pk %}" style="font-size: 25px;margin: 15px; text-decoration: none;">
+                    <span class="label {% cycle 'label-default' 'label-primary' 'label-success' 'label-info' 'label-warning' 'label-danger' %}">
+                    {{ tags.T_tag }}</span>
+                </a>
+
+
+            {% endfor %}
+
+</div>

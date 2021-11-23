@@ -1,0 +1,17 @@
+{% load video_tag %}
+
+
+<div class="category_name" style="margin-top:35px;">
+   {% get_categories as category_list %}
+
+            {% for category in category_list %}
+
+                <a href="{% url 'video:video_category' category.pk %}" style="font-size: 25px;margin: 15px; text-decoration: none;">
+                    <span class="label {% cycle 'label-default' 'label-primary' 'label-success' 'label-info' 'label-warning' 'label-danger' %}">
+                    {{ category.C_title }}</span>
+                </a>
+
+
+            {% endfor %}
+
+</div>

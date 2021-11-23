@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load video_tag %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+
+
+{% endblock css %}
+
+
+
+{% block content %}
+
+<div class="details" style="margin: auto 100px; " >
+
+    <video class="video" autoplay="autoplay" controls="controls">
+            <source src="{{ videos.file.url }}" type="video/mp4">
+    </video>
+    <div class="video-info">
+        <div class="video-title">{{ videos.title }}</div>
+        <div class="video-view-count">{{ videos.view_count }}次观看</div>
+        <div class="video-view-operation">
+            {{videos.desc}}
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascript %}
+
+
+{% endblock javascript %}

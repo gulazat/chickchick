@@ -1,0 +1,90 @@
+ {% load static %}
+ {% load thumbnail %}
+
+
+<nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="{% url 'home' %}"><span class="navbar-text">ChiKChiK</span></a>
+
+            </div>
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="my-nav">
+                <ul class="nav navbar-nav" >
+                    <li class="active"><a href="{% url 'video:all_video' %}">全部 </a></li>
+                     <li><a href="{% url 'video:all_tags' %}">成长日记</a></li>
+                    <li><a href="{% url 'video:introduction' %}">网站介绍</a></li>
+<!--                    <li class="div1"><a href="#"  id="premium1">订阅</a></li>-->
+
+
+
+
+
+                </ul>
+                <div class="div1"><a href="#" id="premium1">常见问题</a></div>
+                <div class="pull-right" style="margin-right: 35px; margin-bottom: 20px; margin-left:15px;">
+
+                    {% if user.is_authenticated %}
+                    <span>
+                        {{ user.username }}
+                    </span>
+                    <span style="font-size: 20px; color: black; line-height: 5px; text-decoration: none;"><a href="{% url 'users:logout' %}">:Logout</a></span>
+
+                    {% else %}
+                    <a href="{% url 'users:login' %}" style="color: black;font-size: 20px; line-height: 5px; text-decoration: none;">login</a>
+
+
+                    {% endif %}
+
+                </div>
+                <div>
+                    <form class="navbar-form navbar-left" role="search" style="margin-left: 150px;">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="enter key words:">
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+<!--                <form class="navbar-form navbar-left" role="search">-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="input-group">-->
+<!--                            <input type="text" class="form-control" placeholder="enter key words:">-->
+
+
+
+
+<!--                        </div>-->
+
+<!--                    </div>-->
+
+<!--                </form>-->
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+        </div>
+</nav>
+
